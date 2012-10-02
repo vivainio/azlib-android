@@ -48,6 +48,8 @@ public class MainActivity extends Activity {
     private String sessionid;
     private String server_url;
     private HttpClient httpConnection;
+    private String access_token;
+    
     public void setArg(String key, String value) {
     	if (!firstArg) {
     		bld.append("&");
@@ -184,8 +186,8 @@ public class MainActivity extends Activity {
 			String access_token_url = server_url + "/api/v1/fetch_access_token/?sessionid="+sessionid;
 			try {
 				BufferedReader r = getHttp(access_token_url);
-				String token = r.readLine();
-				System.out.println("Token is " + token); 
+				access_token = r.readLine();
+				System.out.println("Token is " + access_token); 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -200,11 +202,40 @@ public class MainActivity extends Activity {
     	
     
     };
+    
+    private class GetGDriveDataTask extends AsyncTask<URL, Integer, Long> {
+
+		@Override
+		protected Long doInBackground(URL... params) {
+			 String test_url = "https://www.googleapis.com/drive/v2/files?access_token="+access_token;
+			
+			 try {
+				BufferedReader r = getHttp(test_url);
+				for (;;) {
+					String line = r.readLine();
+					if (line == null)
+						break;
+					System.out.println(line);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 
+			// TODO Auto-generated method stub
+			return null;
+		}
+    
+    }
     public void finishAuth(View view) {
     	new FetchTokenTask().execute(null, null);
 		
 		
     	
+    }
+    
+    public void doCallApi(View view) {
+    	new GetGDriveDataTask().execute(null, null);
     }
     
 }

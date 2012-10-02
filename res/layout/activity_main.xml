@@ -16,24 +16,28 @@
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_marginTop="60dp"
-        android:text="Start auth"
-        android:onClick="startAuth" 
-        
-        />
+        android:onClick="startAuth"
+        android:text="Start auth" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_alignRight="@+id/button1"
-        android:layout_below="@+id/button1"
-        android:layout_marginTop="16dp"
-        android:text="Finish auth"
-        android:onClick="finishAuth" 
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignParentTop="true"
+        android:onClick="finishAuth"
+        android:text="Finish auth" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="Svc call"
+        android:onClick="doCallApi" 
         />
 
 </RelativeLayout>
